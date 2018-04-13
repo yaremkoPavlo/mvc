@@ -1,10 +1,7 @@
 <?php
 
-function autoLoader ($class) {
-    $class = str_replace('\\','/',$class) . '.php';
-    if (file_exists($class)) {
-        require_once $class;
-    }
-}
-
-spl_autoload_register('autoLoader');
+//in this file we require main files
+require_once 'controllers/FrontController.php';
+require_once 'core/Controller.php';
+require_once 'core/Model.php';
+require_once 'core/View.php';

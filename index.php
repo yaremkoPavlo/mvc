@@ -4,7 +4,6 @@ error_reporting (E_ALL);
 
 include 'autoloader.php';
 
-use router\Router;
+$fc = new FrontController();
+$fc->run();
 
-$router = new Router();
-$router->parseUrl();
