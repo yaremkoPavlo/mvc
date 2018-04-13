@@ -1,5 +1,4 @@
 <?php
-namespace app;
 
 function autoLoader ($class) {
     $class = str_replace('\\','/',$class) . '.php';
