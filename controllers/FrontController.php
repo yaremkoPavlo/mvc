@@ -12,29 +12,41 @@ class FrontController
 
     }
 
-    protected function parseUrl():array
+    /**
+     * call Router method
+     * @return array
+     */
+    private function parseUri():array
     {
-        return $this->router->parseUrl();
+
+        return $this->router->parseUri();
     }
 
     public function run()
     {
-        $paramArr = $this->parseUrl();
-        $nameController = $paramArr[0] . '_Controller';
-        $nameAction = $paramArr[1];
+        $paramArr = $this->parseUri();
+
+        $nameController = ucfirst(array_shift($paramArr)) . '_Controller';
+        $nameAction = array_shift($paramArr);
 
         //require controller class
         $controllerPath = "controllers/" . $nameController . ".php";
-        if(file_exists($controllerPath))
+
+        //if controller file doesn't exist change controller to default controller
+        // also can trow exception
+        if(!file_exists($controllerPath))
         {
-            require_once "$controllerPath";
+            $nameController = Constants::DEFAULT_CONTROLLER . '_Controller';
+            $controllerPath = "controllers/".$nameController.".php";
+
         }
+        require_once "$controllerPath";
 
         //create new controller
         $cc = new $nameController();
-        if(method_exists($cc, $nameAction) && $nameAction != 'index')
+        if(method_exists($cc, $nameAction))
         {
-            $cc->$nameAction($paramArr[2]);
+            $cc->$nameAction($paramArr);
         }
         else
         {

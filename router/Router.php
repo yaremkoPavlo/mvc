@@ -2,43 +2,45 @@
 
 class Router
 {
-    private $paramArr;
+    private $routes;
 
     public function __construct()
     {
-        $this->paramArr = [];
+        $this->routes = [];
     }
 
-    public function parseUrl():array
+    /**
+     * @@return array
+     */
+    private function getUri()
+    {
+        //get url and parse to array
+        $uri = trim($_SERVER['REQUEST_URI'], '/');
+        $uri = explode('/', $uri);
+        return $uri;
+    }
+
+    /**
+     * @return array
+     */
+    public function parseUri()
     {
         //default name of controller and action
-        $controller_name = 'Login';
-        $action_name = 'index';
+        $controller_name = Constants::DEFAULT_CONTROLLER;
+        $action_name = Constants::DEFAULT_ACTION;
 
-        $param = [];
-
-        //get url and parse to array
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
+        $routes = $this->getUri();
 
         //check available of
-        if (!empty($routes[1]))
+        if (empty($routes[0]))
         {
-            $controller_name = $routes[1];
+             $routes[0] = $controller_name;
         }
-        if (!empty($routes[2]))
+        if (empty($routes[1]))
         {
-            $action_name = $routes[2];
-        }
-
-        $this->paramArr[0] = $controller_name;
-        $this->paramArr[1] = $action_name;
-
-        if (!empty($routes[3]))
-        {
-            $param = array_slice($routes, 3);
-            $this->paramArr[] =  $param;
+            $routes[1] = $action_name;
         }
 
-        return $this->paramArr;
+        return $routes;
     }
 }

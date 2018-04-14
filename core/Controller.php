@@ -10,7 +10,7 @@ abstract class Controller
 //        $this->model = new Model();
 //    }
 
-    public function index()
+    public function index($param)
     {
         echo 'index';
     }
