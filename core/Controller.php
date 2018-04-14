@@ -2,6 +2,7 @@
 
 abstract class Controller
 {
+    protected $isSecured = 0;
 //    protected $view;
 //    protected $model;
 //    public function __construct()
@@ -10,9 +11,15 @@ abstract class Controller
 //        $this->model = new Model();
 //    }
 
-    public function index($param)
+    abstract public function index($param);
+
+    abstract public function render();
+
+    protected function getAuthenticationStatus()
     {
-        echo 'index';
+        $authModule = new AuthModule();
+        $this->isSecured = $authModule->checkSecured();
+        return $this;
     }
 
     protected function viewHelper()

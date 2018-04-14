@@ -1,6 +1,6 @@
 <?php
 
-class ViewHelper
+class ViewHelper extends View
 {
 
 }
