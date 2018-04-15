@@ -2,16 +2,17 @@
 
 class Model
 {
-    protected static function connectToDB()
+    protected static function connectToDB($isSecured)
     {
-        return DBconfig::connect();
+        if ($isSecured == 1)
+        {
+            return DBconfig::connectRoot();
+        }
+        else
+        {
+            return DBconfig::connect();
+        }
     }
-
-    protected static function connectToDB_root()
-    {
-        return DBconfig::connectRoot();
-    }
-
 
 
 }
