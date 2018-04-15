@@ -3,29 +3,33 @@
 abstract class Controller
 {
     protected $isSecured = 0;
-//    protected $view;
-//    protected $model;
-//    public function __construct()
-//    {
-//        $this->view = new View();
-//        $this->model = new Model();
-//    }
 
     abstract public function index($param);
 
-    abstract public function render();
+    abstract public function render($param);
 
     protected function getAuthenticationStatus()
     {
+        require_once "config/AuthModule.php";
         $authModule = new AuthModule();
         $this->isSecured = $authModule->checkSecured();
         return $this;
     }
 
-    protected function viewHelper()
+    public function read($paramArray)
     {
-        require_once 'views/ViewHelper.php';
-
-        return new ViewHelper();
     }
+
+    public function delete($paramArray)
+    {
+        return false;
+    }
+
+
+//    protected function viewHelper()
+//    {
+//        require_once 'views/ViewHelper.php';
+//
+//        return new ViewHelper();
+//    }
 }

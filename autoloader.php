@@ -6,3 +6,4 @@ require_once 'core/Controller.php';
 require_once 'core/Model.php';
 require_once 'core/View.php';
 require_once 'config/Constants.php';
+require_once 'config/DBconfig.php';
