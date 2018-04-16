@@ -46,12 +46,13 @@ class FrontController
         $cc = new $nameController();
         if(method_exists($cc, $nameAction))
         {
-            $cc->$nameAction($paramArr);
+            return call_user_func_array(array($cc, $nameAction), $paramArr);
+            //$cc->$nameAction($paramArr);
         }
         else
         {
             //here can trow new exception, but we call default method index
-            $cc->index();
+            return $cc->index();
         }
 
     }

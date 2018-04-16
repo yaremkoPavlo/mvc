@@ -4,9 +4,10 @@ abstract class Controller
 {
     protected $isSecured = 0;
 
-    abstract public function index($param);
+    abstract public function index();
 
-    abstract public function render($param);
+    //this method should call View depends on demand
+    abstract protected function render($param);
 
     protected function getAuthenticationStatus()
     {
@@ -18,14 +19,15 @@ abstract class Controller
 
     public function read($paramArray)
     {
+        $r = Model::getInform($paramArray, $this->isSecured);
+        self::render($r);
     }
 
-    public function delete($paramArray)
-    {
-        return false;
-    }
-
-
+//    public function delete($paramArray)
+//    {
+//        return false;
+//    }
+//
 //    protected function viewHelper()
 //    {
 //        require_once 'views/ViewHelper.php';

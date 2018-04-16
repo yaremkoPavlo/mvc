@@ -14,5 +14,11 @@ class Model
         }
     }
 
+    public static function getInform($paramArray, $isSecured)
+    {
+        $db = self::connectToDB($isSecured);
+        //SELECT * FROM tableName WHERE par0=$paramArray[0] par1=$paramArray[1] ...
+        return $db->query('some query');
+    }
 
 }
