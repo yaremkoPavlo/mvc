@@ -2,14 +2,15 @@
 
 class AuthModule
 {
-    private function checkSesion()
+    private function checkSession()
     {
+        //this method should to get session information
         return 'user';
     }
 
     public function checkSecured()
     {
-        if ($this->checkSesion() == 'admin')
+        if ($this->checkSession() == 'admin')
         {
             return 1;
         }
