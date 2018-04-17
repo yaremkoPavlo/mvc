@@ -1,4 +1,4 @@
-##README
+## README
 New controllers must be in `controllers` folder, and have name like `New_Controller` with first capitalize letter and `_`.
 Every controller extends from main controller `Controller` in `core` folder.
 <br/>
