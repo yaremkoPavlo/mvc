@@ -2,6 +2,7 @@
 
 class Login_Controller extends Controller
 {
+
     public function index()
     {
         View::sayHello('User');
@@ -10,13 +11,14 @@ class Login_Controller extends Controller
     protected function render($param)
     {
         // TODO: Implement render() method.
-        View::renderResultToArray($param);
+        View::renderResultFromArray($param);
     }
 
-    public function showArray()
+    public function showAll()
     {
-        $arr = ['a'=> 'just', 'b' => 'test'];
+        $arr = Model::getAllInformation($this);
         $this->render($arr);
         return $this;
     }
+
 }

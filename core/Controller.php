@@ -19,15 +19,15 @@ abstract class Controller
 
     public function read($paramArray)
     {
-        $r = Model::getInform($paramArray, $this->isSecured);
+        $r = Model::getInform($paramArray, $this);
         self::render($r);
     }
 
-//    public function delete($paramArray)
-//    {
-//        return false;
-//    }
-//
+    public function getSecuredStatus()
+    {
+        return $this->isSecured;
+    }
+
 //    protected function viewHelper()
 //    {
 //        require_once 'views/ViewHelper.php';

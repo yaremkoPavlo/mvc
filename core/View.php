@@ -7,16 +7,13 @@ class View
         echo 'Hello ' . $person;
     }
 
-    public static function renderResultToArray($result)
+    public static function renderResultFromArray($result)
     {
-        foreach ($result as $key => $value)
-        {
-            echo $key . " = ". $value;
-        }
+        require_once 'views/table.php';
     }
 
-    public static function renderOnceRow($row)
+    public static function renderOnceRow($result)
     {
-        print_r($row);
+        require_once 'views/single.php';
     }
 }
