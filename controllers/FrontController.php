@@ -1,5 +1,9 @@
 <?php
 
+//namespace controllers;
+//use router\Router;
+//use config\Constants;
+
 require_once 'router/Router.php';
 
 class FrontController
@@ -12,10 +16,7 @@ class FrontController
 
     }
 
-    /**
-     * call Router method
-     * @return array
-     */
+    //call Router method
     private function parseUri():array
     {
 
@@ -44,6 +45,9 @@ class FrontController
 
         //create new controller
         $cc = new $nameController();
+
+        $cc->attach(new AuthObserver());
+
         if(method_exists($cc, $nameAction))
         {
             return call_user_func_array(array($cc, $nameAction), $paramArr);

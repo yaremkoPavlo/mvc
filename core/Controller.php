@@ -1,6 +1,7 @@
 <?php
-
-abstract class Controller
+//namespace core;
+require_once 'observer/Subject.php';
+abstract class Controller extends Subject
 {
     protected $isSecured = 0;
 

@@ -1,4 +1,6 @@
 <?php
+//namespace router;
+//use config\Constants;
 
 class Router
 {
