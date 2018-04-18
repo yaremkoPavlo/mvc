@@ -1,9 +1,10 @@
 <?php
-//namespace core;
+namespace core;
+
 
 class View
 {
-    public static function sayHello($person)
+    public function sayHello($person)
     {
         echo 'Hello ' . $person;
     }

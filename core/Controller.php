@@ -1,14 +1,25 @@
 <?php
-//namespace core;
-require_once 'observer/Subject.php';
-abstract class Controller extends Subject
+namespace core;
+
+abstract class Controller
 {
     protected $isSecured = 0;
+    protected $view;
+    protected $model;
+
+    public function __construct()
+    {
+        $this->view = new View();
+        $this->model = new Model();
+    }
 
     abstract public function index();
 
     //this method should call View depends on demand
-    abstract protected function render($param);
+//    protected function renderView()
+//    {
+//        return new View();
+//    }
 
     protected function getAuthenticationStatus()
     {
@@ -21,7 +32,7 @@ abstract class Controller extends Subject
     public function read($paramArray)
     {
         $r = Model::getInform($paramArray, $this);
-        self::render($r);
+        $this->renderView()::renderResultFromArray($r);
     }
 
     public function getSecuredStatus()
@@ -29,10 +40,4 @@ abstract class Controller extends Subject
         return $this->isSecured;
     }
 
-//    protected function viewHelper()
-//    {
-//        require_once 'views/ViewHelper.php';
-//
-//        return new ViewHelper();
-//    }
 }

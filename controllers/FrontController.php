@@ -1,10 +1,7 @@
 <?php
 
-//namespace controllers;
-//use router\Router;
-//use config\Constants;
-
-require_once 'router/Router.php';
+namespace controllers;
+use router\Router;
 
 class FrontController
 {
@@ -16,48 +13,27 @@ class FrontController
 
     }
 
-    //call Router method
-    private function parseUri():array
-    {
-
-        return $this->router->parseUri();
-    }
-
     public function run()
     {
-        $paramArr = $this->parseUri();
+        $paramArr = $this->router->parseUri();
 
-        $nameController = ucfirst(array_shift($paramArr)) . '_Controller';
-        $nameAction = array_shift($paramArr);
+        $nameController = "controllers\\" . ucfirst(array_shift($paramArr)) . "Controller";
+        $nameAction = array_shift($paramArr) . "Action";
 
-        //require controller class
-        $controllerPath = "controllers/" . $nameController . ".php";
-
-        //if controller file doesn't exist change controller to default controller
-        // also can trow exception
-        if(!file_exists($controllerPath))
+        if(class_exists($nameController))
         {
-            $nameController = Constants::DEFAULT_CONTROLLER . '_Controller';
-            $controllerPath = "controllers/".$nameController.".php";
+            $cc = new $nameController();
 
-        }
-        require_once "$controllerPath";
-
-        //create new controller
-        $cc = new $nameController();
-
-        $cc->attach(new AuthObserver());
-
-        if(method_exists($cc, $nameAction))
-        {
-            return call_user_func_array(array($cc, $nameAction), $paramArr);
-            //$cc->$nameAction($paramArr);
-        }
-        else
-        {
-            //here can trow new exception, but we call default method index
-            return $cc->index();
-        }
+            if(method_exists($cc, $nameAction))
+            {
+              return call_user_func_array(array($cc, $nameAction), $paramArr);
+              //$cc->$nameAction($paramArr);
+            }
+            else
+            {
+              return $cc->index();
+            }
+          }
 
     }
 

@@ -1,4 +1,5 @@
 <?php
+namespace config;
 
 class DBconfig
 {
@@ -13,14 +14,7 @@ class DBconfig
     //make connection from user, config is in 'config/DB_params.php'
     public static function connect()
     {
-        $params = include_once('config/DB_params.php');
-        return self::getConnect($params);
+        return self::getConnect(DBparams::params);
     }
 
-    //make root connection to DB, config is in 'config/DB_params_root.php'
-    public static function connectRoot()
-    {
-        $params = include_once('config/DB_params_root.php');
-        return self::getConnect($params);
-    }
 }

@@ -1,24 +1,31 @@
 <?php
-//namespace router;
-//use config\Constants;
+namespace router;
+use config\routes;
 
 class Router
 {
-    private $routes;
-
-    public function __construct()
-    {
-        $this->routes = [];
-    }
-
     /**
-     * @@return array
+     * @@return string
      */
     private function getUri()
     {
-        //get url and parse to array
+        $routes = require_once ('config/routes.php');
         $uri = trim($_SERVER['REQUEST_URI'], '/');
-        $uri = explode('/', $uri);
+
+//        if(empty($uri))
+//        {
+//            return 'login';
+//        }
+
+        foreach ($routes as $key => $value)
+        {
+            if (preg_match("~$key~", $uri))
+            {
+                $uri = $value;
+                return $uri;
+            }
+        }
+
         return $uri;
     }
 
@@ -28,21 +35,22 @@ class Router
     public function parseUri()
     {
         //default name of controller and action
-        $controller_name = Constants::DEFAULT_CONTROLLER;
-        $action_name = Constants::DEFAULT_ACTION;
+        $controller_name = "login";
+        $action_name = "index";
 
-        $routes = $this->getUri();
+        $uri = $this->getUri();
+        $uri = explode('/', $uri);
 
         //check available of
-        if (empty($routes[0]))
+        if (empty($uri[0]))
         {
-             $routes[0] = $controller_name;
+             $uri[0] = $controller_name;
         }
-        if (empty($routes[1]))
+        if (empty($uri[1]))
         {
-            $routes[1] = $action_name;
+            $uri[1] = $action_name;
         }
 
-        return $routes;
+        return $uri;
     }
 }
