@@ -14,7 +14,8 @@ class DBconfig
     //make connection from user, config is in 'config/DB_params.php'
     public static function connect()
     {
-        return self::getConnect(DBparams::params);
+        $params = require_once ("config/DBparams");
+        return self::getConnect($params);
     }
 
 }

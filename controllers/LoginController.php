@@ -6,15 +6,9 @@ use core\Controller;
 class LoginController extends Controller
 {
 
-    public function index()
+    public function indexAction()
     {
         $this->view->sayHello('User');
-    }
-
-    protected function render($param)
-    {
-        // TODO: Implement render() method.
-        //View::renderResultFromArray($param);
     }
 
     public function showAll()

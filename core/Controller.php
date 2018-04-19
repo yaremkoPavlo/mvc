@@ -13,27 +13,26 @@ abstract class Controller
         $this->model = new Model();
     }
 
-    abstract public function index();
+    abstract public function indexAction();
 
-    //this method should call View depends on demand
-//    protected function renderView()
+//    protected function renderView($data)
 //    {
-//        return new View();
+//        return $this->view->render($data);
 //    }
 
-    protected function getAuthenticationStatus()
-    {
-        require_once "config/AuthModule.php";
-        $authModule = new AuthModule();
-        $this->isSecured = $authModule->checkSecured();
-        return $this;
-    }
+//    protected function getAuthenticationStatus()
+//    {
+//        require_once "config/AuthModule.php";
+//        $authModule = new AuthModule();
+//        $this->isSecured = $authModule->checkSecured();
+//        return $this;
+//    }
 
-    public function read($paramArray)
-    {
-        $r = Model::getInform($paramArray, $this);
-        $this->renderView()::renderResultFromArray($r);
-    }
+//    public function read($paramArray)
+//    {
+//        $r = Model::getInform($paramArray, $this);
+//        $this->renderView()::renderResultFromArray($r);
+//    }
 
     public function getSecuredStatus()
     {

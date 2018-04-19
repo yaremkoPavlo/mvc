@@ -31,7 +31,7 @@ class FrontController
             }
             else
             {
-              return $cc->index();
+              return $cc->indexAction();
             }
           }
 

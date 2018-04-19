@@ -12,11 +12,6 @@ class Router
         $routes = require_once ('config/routes.php');
         $uri = trim($_SERVER['REQUEST_URI'], '/');
 
-//        if(empty($uri))
-//        {
-//            return 'login';
-//        }
-
         foreach ($routes as $key => $value)
         {
             if (preg_match("~$key~", $uri))
@@ -35,7 +30,7 @@ class Router
     public function parseUri()
     {
         //default name of controller and action
-        $controller_name = "login";
+        $controller_name = "default";
         $action_name = "index";
 
         $uri = $this->getUri();

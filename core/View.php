@@ -9,13 +9,18 @@ class View
         echo 'Hello ' . $person;
     }
 
-    public static function renderResultFromArray($result)
+    public function renderResultFromArray($result)
     {
         require_once 'views/table.php';
     }
 
-    public static function renderOnceRow($result)
+    public function renderOnceRow($result)
     {
         require_once 'views/single.php';
+    }
+
+    public function renderMain()
+    {
+        require_once 'views/main.php';
     }
 }
