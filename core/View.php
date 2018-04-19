@@ -23,4 +23,9 @@ class View
     {
         require_once 'views/main.php';
     }
+
+    public function err404()
+    {
+        require_once 'views/err404.php';
+    }
 }

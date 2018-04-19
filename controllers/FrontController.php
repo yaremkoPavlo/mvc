@@ -33,7 +33,12 @@ class FrontController
             {
               return $cc->indexAction();
             }
-          }
+        }
+        else
+        {
+            $cc = new Err404();
+            return $cc->indexAction();
+        }
 
     }
 
