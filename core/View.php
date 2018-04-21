@@ -21,11 +21,11 @@ class View
 
     public function renderMain()
     {
-        require_once 'views/main.php';
+        require_once 'views/main.html';
     }
 
     public function err404()
     {
-        require_once 'views/err404.php';
+        require_once 'views/err404.html';
     }
 }
