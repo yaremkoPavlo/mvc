@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $this->view->renderMain();
+        $this->view->renderMain('welcome');
     }
 }

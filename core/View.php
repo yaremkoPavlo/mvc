@@ -9,23 +9,18 @@ class View
         echo 'Hello ' . $person;
     }
 
-    public function renderResultFromArray($result)
+    public function renderMain($view)
     {
-        require_once 'views/table.php';
+        $viewPath = "views/" . $view . ".php";
+        if (file_exists($viewPath))
+        {
+            $param =  require_once($viewPath);
+        }
+        else
+        {
+            $param = require_once('views/err404.php');
+        }
+        require_once 'views/main.php';
     }
 
-    public function renderOnceRow($result)
-    {
-        require_once 'views/single.php';
-    }
-
-    public function renderMain()
-    {
-        require_once 'views/main.html';
-    }
-
-    public function err404()
-    {
-        require_once 'views/err404.html';
-    }
 }

@@ -7,6 +7,6 @@ class Err404 extends Controller
 {
     public function indexAction()
     {
-        $this->view->err404();
+        $this->view->renderMain('err404');
     }
 }

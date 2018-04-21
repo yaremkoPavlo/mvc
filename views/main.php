@@ -16,8 +16,10 @@
         </nav>
     </header>
     <div id='container'>
-        <h1>404 Page not found</h1>
+       <?php echo $param; ?>
     </div>
-    <footer></footer>
+    <footer>
+        <p>&copy; Pavlo Yaremko</p>
+    </footer>
 </body>
 </html>
