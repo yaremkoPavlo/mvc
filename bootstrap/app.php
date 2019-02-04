@@ -7,8 +7,10 @@ $routes = require_once __DIR__ . '../config/routes.php';
 
 $router = new Router();
 $router->setRoutes($routes);
+$router->run();
 
-$fc = new FrontController($router);
-$fc->run();
+
+//$fc = new FrontController($router);
+//$fc->run();
 
 ?>
