@@ -8,15 +8,14 @@ class FrontController
 {
     private $router;
 
-    public function __construct()
+    public function __construct(Router $router)
     {
-        $this->router = new Router();
-        self::run();
-
+        $this->router = $router;
     }
 
-    public function run()
+    public function run($requestedUrl = null)
     {
+        $this->router->dispatch($requestedUrl);
         $params = $this->router->getParams();
         $controllerName = $this->router->getControllerName();
         $actionName = $this->router->getActionName();
