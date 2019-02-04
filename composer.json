@@ -1,0 +1,9 @@
+{
+    "name": "developer/test-mvc",
+	"autoload": {
+		"PSR-4" : {
+			"App\\": "app/",
+			"Core\\": "src/"
+		}
+	}
+}

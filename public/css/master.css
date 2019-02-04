@@ -1,0 +1,39 @@
+body, div {
+    margin: 0;
+    padding: 0;
+}
+header {
+    height: 46px;
+    display: flex;
+}
+header nav {
+    align-self: center;
+}
+header nav a {
+    padding: 10px;
+    margin: 5px;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+header nav a:hover {
+    background: darkblue;
+
+}
+header nav a:visited, header nav a:link {
+    color: white;
+}
+h1 {
+    text-align: center;
+}
+body {
+    background: #cdf;
+    color: black;
+}
+div#container{
+    min-height: 100%;
+    margin: auto;
+    width: 800px;
+}
+header, footer{
+    background: dodgerblue;
+}

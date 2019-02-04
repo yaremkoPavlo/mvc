@@ -1,5 +1,5 @@
 <?php
-namespace core;
+namespace Core;
 
 abstract class Controller
 {
@@ -13,7 +13,7 @@ abstract class Controller
         $this->model = new Model();
     }
 
-    abstract public function indexAction();
+    abstract public function index();
 
 //    protected function renderView($data)
 //    {
