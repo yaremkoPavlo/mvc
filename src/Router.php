@@ -10,7 +10,6 @@ class Router
      */
     private static $routes = [];
 
-
     /**
      * Params for calling action
      * @var array

@@ -1,6 +1,5 @@
 <?php
 
-use App\Controllers\FrontController;
 use Core\Router;
 
 $routes = require_once __DIR__ . '/../config/routes.php';

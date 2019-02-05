@@ -1,6 +1,7 @@
 <?php
 namespace Core;
 
+// TODO: make render templates
 
 class View
 {
@@ -21,6 +22,5 @@ class View
 //            $param = require_once('views/err404.php');
 //        }
 //        require_once 'views/main.php';
-        print_r ($_SERVER);
     }
 }
