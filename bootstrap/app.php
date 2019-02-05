@@ -3,14 +3,8 @@
 use App\Controllers\FrontController;
 use Core\Router;
 
-$routes = require_once __DIR__ . '../config/routes.php';
+$routes = require_once __DIR__ . '/../config/routes.php';
 
 $router = new Router();
 $router->setRoutes($routes);
-$router->run();
-
-
-//$fc = new FrontController($router);
-//$fc->run();
-
-?>
+$router->dispatch($_SERVER['REQUEST_URI']);

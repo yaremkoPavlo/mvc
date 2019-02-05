@@ -9,8 +9,8 @@ class View
         echo 'Hello ' . $person;
     }
 
-//    public function renderMain($view)
-//    {
+    public static function renderMain($view = null, $args = [])
+    {
 //        $viewPath = "views/" . $view . ".php";
 //        if (file_exists($viewPath))
 //        {
@@ -21,6 +21,6 @@ class View
 //            $param = require_once('views/err404.php');
 //        }
 //        require_once 'views/main.php';
-//    }
-
+        print_r ($_SERVER);
+    }
 }

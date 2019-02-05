@@ -26,10 +26,10 @@ class Router
         self::$routes = array_merge(self::$routes, $route);
     }
 
-    private function dispatch($requestedUrl = null)
+    public function dispatch($requestedUrl = null)
     {
         if ($requestedUrl === null) {
-            $uri = reset(explode('?', $_SERVER["REQUEST_URI"]));
+            $uri =explode('?', $_SERVER["REQUEST_URI"])[0];
             $requestedUrl = urldecode(rtrim($uri, '/'));
         }
 
@@ -52,31 +52,41 @@ class Router
                 }
             }
         }
+        return $this->actionCall();
     }
 
     private function splitUrl($url)
     {
         $this->params = [];
         $arr = preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
-        $this->controllerName = ucfirst(array_shift($arr));
+        $this->controllerName = 'App\\Controllers\\' . ucfirst(array_shift($arr)) . 'Controller';
         $this->actionName = array_shift($arr);
         $this->params = $arr;
     }
 
-    public function run($requestedUrl = null)
+    private function actionCall()
     {
-        $this->dispatch($requestedUrl);
-
         if(class_exists($this->controllerName))
         {
             $cc = new $this->controllerName();
 
-            if(method_exists($cc, $this->actionName))
+            if(!method_exists($cc, $this->actionName))
             {
-                return call_user_func_array(array($cc, $this->actionName), $this->params);
+                $cc = new ErrorController();
+                $this->params = ['className' => $this->controllerName,
+                    'method' => $this->actionName,
+                    'message' => 'Method not found'
+                ];
+                $this->actionName = 'throwException';
             }
+        } else {
+            $cc = new ErrorController();
+            $this->actionName = 'throwException';
+            $this->params = ['className' => $this->controllerName,
+                             'message' => 'Class not found'
+                ];
         }
-        $cc = new Err404();
-        return $cc->index();
+
+        return call_user_func_array(array($cc, $this->actionName), $this->params);
     }
 }
