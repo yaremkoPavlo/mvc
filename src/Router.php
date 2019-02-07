@@ -16,10 +16,21 @@ class Router
      */
     private $params = [];
 
+    /**
+     * Default controller name
+     */
     private $controllerName = 'Main';
 
+
+    /**
+     * Default action name
+     */
     private $actionName = 'index';
 
+
+    /**
+     * @var array
+     */
     public function setRoutes(array $route)
     {
         self::$routes = array_merge(self::$routes, $route);
@@ -60,7 +71,9 @@ class Router
         $arr = preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
         $this->controllerName = 'App\\Controllers\\' . ucfirst(array_shift($arr)) . 'Controller';
         $this->actionName = array_shift($arr);
-        $this->params = $arr;
+        if (!empty($arr)) {
+            $this->params = $arr;
+        }
     }
 
     private function actionCall()
