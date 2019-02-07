@@ -4,15 +4,15 @@ namespace Core;
 
 class ErrorController extends Controller
 {
-    public function index()
+    public function index($args = [])
     {
         echo 'Page not found';
     }
 
-    public function throwException(Array $params)
+    public function throwException($params)
     {
         $message = $params['message'];
         $statusCode = $params['statusCode'] ?? 419;
-        return new \Exception($message, $statusCode);
+        throw new \Exception($message, $statusCode);
     }
 }

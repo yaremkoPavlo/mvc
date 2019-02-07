@@ -85,11 +85,11 @@ class Router
             if(!method_exists($cc, $this->actionName))
             {
                 $cc = new ErrorController();
-                $this->params = ['className' => $this->controllerName,
-                    'method' => $this->actionName,
-                    'message' => 'Method not found'
-                ];
                 $this->actionName = 'throwException';
+                $this->params = ['className' => $this->controllerName,
+                                 'message' => 'Method not found'
+                ];
+                
             }
         } else {
             $cc = new ErrorController();
@@ -98,7 +98,6 @@ class Router
                              'message' => 'Class not found'
                 ];
         }
-
-        return call_user_func_array(array($cc, $this->actionName), $this->params);
+        return call_user_func([$cc, $this->actionName], $this->params);
     }
 }

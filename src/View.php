@@ -5,22 +5,29 @@ namespace Core;
 
 class View
 {
-    public function sayHello($person)
+    public static function render($view, $args = [])
     {
-        echo 'Hello ' . $person;
+        if ($view == null) 
+            return;
+        $viewPath = dirname(__DIR__) . '/bootstrap/views/' . $view . '.php';
+
+        self::req_one($viewPath, $view, $args);
     }
 
-    public static function renderMain($view = null, $args = [])
+    public static function renderTemplate($template, $view, $args = [])
     {
-//        $viewPath = "views/" . $view . ".php";
-//        if (file_exists($viewPath))
-//        {
-//            $param =  require_once($viewPath);
-//        }
-//        else
-//        {
-//            $param = require_once('views/err404.php');
-//        }
-//        require_once 'views/main.php';
+        $templPath = dirname(__DIR__) .'/bootstrap/templates/' . $template . '.php';
+        self::req_one($templPath, $view, $args);
+
+
+    }
+
+    protected static function req_one($viewPath, $view, $args = [])
+    {
+        if (file_exists($viewPath)) {
+           return require_once($viewPath);
+        } else {
+           throw new \Exception("$viewPath not found"); 
+        }
     }
 }

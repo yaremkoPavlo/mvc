@@ -10,16 +10,11 @@ abstract class Controller
      */
     abstract public function index($arg = []);
 
-//    protected function renderView($data)
-//    {
-//        return $this->view->render($data);
-//    }
-
     public function __call($name, $arg = [])
     {
         $method = $name . 'Action';
         if (method_exists($this, $method)) {
-            call_user_func_array([$this, $method], $arg)
+            call_user_func_array([$this, $method], $arg);
         }
     }
 

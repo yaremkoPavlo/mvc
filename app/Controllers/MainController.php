@@ -1,12 +1,19 @@
 <?php
 namespace App\Controllers;
 use Core\Controller;
+use Core\View;
 
 class MainController extends Controller
 {
-    public function index()
+    public function index($arr = [])
     {
-        #$this->view->renderMain('welcome');
-        echo "Hello!";
+        View::renderTemplate(
+            'basic',
+            'home',
+            [
+                'title' => 'test',
+                'body' => 'home'
+            ]
+        );
     }
 }
