@@ -3,6 +3,8 @@
 return array(
      # 'url' => 'controller/action/param1/param2/param3'
     '/' => 'Main/index',
+    '/login' => 'Login/index',
+    '/logout' => 'Login/logout',
     '/contacts' => 'Main/contacts',
     '/blog' => 'Blog/index',
     '/blog/${id}' => 'Blog/viewPost/$1',

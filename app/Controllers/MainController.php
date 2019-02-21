@@ -5,7 +5,7 @@ use Core\View;
 
 class MainController extends Controller
 {
-    public function index($arr = [])
+    public function index()
     {
         View::renderTemplate(
             'basic',
@@ -15,5 +15,10 @@ class MainController extends Controller
                 'body' => 'home'
             ]
         );
+    }
+
+    public function any($arr = [])
+    {
+        header("HTTP/1.0 404 Not Found");
     }
 }

@@ -14,29 +14,39 @@ class Router
      * Params for calling action
      * @var array
      */
-    private $params = [];
+    private static $params = [];
 
     /**
      * Default controller name
      */
-    private $controllerName = 'Main';
+    private static $controllerName = 'Main';
 
 
     /**
      * Default action name
      */
-    private $actionName = 'index';
+    private static $actionName = 'index';
 
+    /**
+     * void function for redirect
+     * @param $where
+     */
+    public static function redirect($where)
+    {
+        if ($_SERVER['REQUEST_URI'] != $where) {
+            header("Location: $where");
+        }
+    }
 
     /**
      * @var array
      */
-    public function setRoutes(array $route)
+    public static function setRoutes(array $route)
     {
         self::$routes = array_merge(self::$routes, $route);
     }
 
-    public function dispatch($requestedUrl = null)
+    public static function dispatch($requestedUrl = null)
     {
         if ($requestedUrl === null) {
             $uri =explode('?', $_SERVER["REQUEST_URI"])[0];
@@ -44,7 +54,7 @@ class Router
         }
 
         if (isset(self::$routes[$requestedUrl])) {
-           $this->splitUrl(self::$routes[$requestedUrl]);
+           self::splitUrl(self::$routes[$requestedUrl]);
         } else {
 
             foreach (self::$routes as $route => $uri) {
@@ -56,48 +66,36 @@ class Router
                     if (strpos($uri, '$') !== false && strpos($route, '(') !== false) {
                         $uri = preg_replace('#^' . $route . '$#', $uri, $requestedUrl);
                     }
-                    $this->splitUrl($uri);
+                    self::splitUrl($uri);
 
                     break;
                 }
             }
         }
-        return $this->actionCall();
+        return self::actionCall();
     }
 
-    private function splitUrl($url)
+    private static function splitUrl($url)
     {
-        $this->params = [];
+        static::$params = [];
         $arr = preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
-        $this->controllerName = 'App\\Controllers\\' . ucfirst(array_shift($arr)) . 'Controller';
-        $this->actionName = array_shift($arr);
+        self::$controllerName = 'App\\Controllers\\' . ucfirst(array_shift($arr)) . 'Controller';
+        self::$actionName = array_shift($arr);
         if (!empty($arr)) {
-            $this->params = $arr;
+            self::$params = $arr;
         }
     }
 
-    private function actionCall()
+    private static function actionCall()
     {
-        if(class_exists($this->controllerName))
+        if(class_exists(self::$controllerName))
         {
-            $cc = new $this->controllerName();
-
-            if(!method_exists($cc, $this->actionName))
-            {
-                $cc = new ErrorController();
-                $this->actionName = 'throwException';
-                $this->params = ['className' => $this->controllerName,
-                                 'message' => 'Method not found'
-                ];
-                
-            }
+            $cc = new self::$controllerName();
         } else {
             $cc = new ErrorController();
-            $this->actionName = 'throwException';
-            $this->params = ['className' => $this->controllerName,
-                             'message' => 'Class not found'
-                ];
+            self::$actionName = 'throwException';
+            self::$params = ['message' => "Class ".self::$controllerName." not found"];
         }
-        return call_user_func([$cc, $this->actionName], $this->params);
+        return call_user_func([$cc, self::$actionName], self::$params);
     }
 }
