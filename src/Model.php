@@ -3,7 +3,7 @@ namespace Core;
 
 // TODO: make model, add ORM system
 
-class Model
+abstract class Model
 {
     protected $db;
     public function __construct()

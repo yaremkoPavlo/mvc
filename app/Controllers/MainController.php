@@ -17,8 +17,9 @@ class MainController extends Controller
         );
     }
 
-    public function any($arr = [])
+    public function anyAction($arr = [])
     {
+        $this->index();
         header("HTTP/1.0 404 Not Found");
     }
 }

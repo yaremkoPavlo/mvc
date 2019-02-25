@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-// TODO: make render templates
+
 
 class View
 {
